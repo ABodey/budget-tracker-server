@@ -1,11 +1,9 @@
 const http = require('http');
 const app = require('./lib/app');
-const connect = require('./lib/connect');
-
-connect();
+const port = process.env.PORT || 3001;
+require('./lib/mongoose');
 
 const server = http.createServer(app);
-const port = process.env.port || 3001;
 
 server.listen(port, () => {
     // eslint-disable-next-line
