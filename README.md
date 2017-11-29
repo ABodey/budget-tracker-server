@@ -1,1 +1,1 @@
-# budget-tracker-server
+# Server for Full-Stack budget tracker
