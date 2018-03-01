@@ -31,16 +31,24 @@ describe('categories', () => {
     it('should update the category document with id', () => {
         let catId = '';
         return request.post('/api/paul/categories')
-            .then(({ body }) => {
-                catId = body._id;
-            })
-            .then( () => request.put(`/api/paul/categories/${catId}`)
-                .send({ budget: 'manga' }))
+            .then(({ body }) => catId = body._id)
+            .then( () => request.put(`/api/paul/categories/${catId}`).send({ budget: 'manga' }))
             .then( () => request.get('/api/paul/categories'))
             .then(({ body }) => {
                 assert.equal(body[0].budget, 'manga');
             });
+    });
 
+    it('should delete category document with id', () => {
+        let catId = '';
+        return request.post('/api/dougie/categories')
+            .then(({ body }) => catId = body._id)
+            .then( () => {
+                return request.delete(`/api/dougie/categories/${catId}`);
+            })
+            .then( ({ body }) => {
+                assert.equal( body.deleted, 'true' );
+            });
     });
 
 
