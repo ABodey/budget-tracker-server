@@ -46,8 +46,8 @@ describe('categories', () => {
             .then( () => {
                 return request.delete(`/api/dougie/categories/${catId}`);
             })
-            .then( ({ body }) => {
-                assert.equal( body.deleted, 'true' );
+            .then(({ body }) => {
+                assert.equal( body.deleted, true );
             });
     });
 
