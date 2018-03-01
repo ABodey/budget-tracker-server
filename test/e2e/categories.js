@@ -31,23 +31,20 @@ describe('categories', () => {
     it('should update the category document with id', () => {
         let catId = '';
         return request.post('/api/paul/categories')
-            .then( category => {
-                catId = category._id;
+            .then(({ body }) => {
+                catId = body._id;
             })
-            .then( () => request.post(`/api/paul/categories/${catId}`)
-                .send({ budget: 'anime' })
-            )
+            .then( () => request.put(`/api/paul/categories/${catId}`)
+                .send({ budget: 'manga' }))
             .then( () => request.get('/api/paul/categories'))
-            .then( categories => {
-                assert.equal(categories.length, 1);
+            .then(({ body }) => {
+                assert.equal(body[0].budget, 'manga');
             });
 
     });
 
 
 });
-
-//Get by ID?
 
 // GET /:name/categories - gets all categories where budget === name (full select)
 // POST /:name/categories - post a new category document with budget = name
