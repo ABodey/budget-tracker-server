@@ -21,12 +21,12 @@ describe('categories', () => {
             });
     });
 
-    // it('should get all categories where budget === name ', () => {
-    //     request.get('/api/categories/candles')
-    //         .then( response => {
-    //             assert.equal(response.body[0].length, 2);
-    //         });
-    // });
+    it('should get all categories where budget === name ', () => {
+        request.get('/api/candles/categories')
+            .then( response => {
+                assert.equal(response.body[0].length, 2);
+            });
+    });
 
 
 });
