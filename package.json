@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run mocha",
+    "mocha": "mocha --recursive",
     "start": "nodemon server.js"
   },
   "repository": {
