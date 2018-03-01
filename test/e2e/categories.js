@@ -81,12 +81,11 @@ describe('categories', () => {
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(({ body }) => {
                 expenseId = body.expenses[0].id;
-                return request.put(`/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
+                return request.put(`/api/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
             })
             .then(({ body }) => {
                 assert.equal(body.expenses[0].price, '200');
             });
-
     });
 
 });
@@ -98,4 +97,5 @@ describe('categories', () => {
 // POST /:name/categories/:id/expenses - $push the expense into category.expenses field of that id
 
 // PUT /:name/categories/:id/expenses/:id - update the expense of the category with that idea
+
 // DELETE /:name/categories/:id/expenses/:id - $pull the expense with that id out of doc
