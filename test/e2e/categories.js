@@ -28,9 +28,26 @@ describe('categories', () => {
             });
     });
 
+    it('should update the category document with id', () => {
+        let catId = '';
+        request.post('/api/manga/categories')
+            .then( category => {
+                catId = category._id;
+            })
+            .then( () => request.post(`/api/manga/categories/${catId}`)
+                .send({ budget: 'anime' })
+            )
+            .then( () => request.get('/api/manga/categories'))
+            .then( categories => {
+                assert.equal(categories.length, 1);
+            });
+
+    });
+
 
 });
 
+//Get by ID?
 
 // GET /:name/categories - gets all categories where budget === name (full select)
 // POST /:name/categories - post a new category document with budget = name
