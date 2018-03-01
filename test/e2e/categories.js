@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const request = require('./request');
 const assert = chai.assert;
 
-
 describe('categories', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
     beforeEach(() => Promise.all([
@@ -51,6 +50,19 @@ describe('categories', () => {
             });
     });
 
+    it('should $push the expense into category.expenses field of that id', () => {
+        let catId = '';
+        const newExpense = {
+            id: '123',
+            name: 'candles',
+        };
+        return request.post('/api/dougie/categories')
+            .then(({ body }) => catId = body._id)
+            .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
+            .then(({ body }) => {
+                assert.equal(body.expenses.name, 'candles');
+            });
+    });
 
 });
 
