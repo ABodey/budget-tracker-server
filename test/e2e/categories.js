@@ -53,7 +53,6 @@ describe('categories', () => {
     it('should $push the expense into category.expenses field of that id', () => {
         let catId = '';
         const newExpense = {
-            id: '123',
             name: 'candles',
         };
         return request.post('/api/dougie/categories')
@@ -64,11 +63,10 @@ describe('categories', () => {
             });
     });
 
-    it('should update the expense of the category with that id', () => {
+    it.only('should update the expense of the category with that id', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
-            id: '123',
             name: 'candles',
         };
 
@@ -79,9 +77,11 @@ describe('categories', () => {
         return request.post('/api/dougie/categories')
             .then(({ body }) => catId = body._id)
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
+            .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
+            .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(({ body }) => {
-                expenseId = body.expenses[0].id;
-                return request.put(`/api/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
+                expenseId = body.expenses[0]._id;
+                return request.put(`/api/dougie/categories/${body._id}/expenses/${expenseId}`).send(update);
             })
             .then(({ body }) => {
                 assert.equal(body.expenses[0].price, '2000');
@@ -106,6 +106,7 @@ describe('categories', () => {
             .then(({ body }) => {
                 assert.equal(body.expenses.length, 0);
             });
+
     });
 
 });
