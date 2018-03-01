@@ -8,7 +8,7 @@ describe('categories', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
 
     it('should post a new category document with budget = name', () => {
-        return request.post('/api/:name/categories')
+        return request.post('/api/bob/categories')
             .then(response => {
                 assert.ok(response.body);
             });
