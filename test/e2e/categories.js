@@ -6,12 +6,13 @@ const assert = chai.assert;
 
 describe('categories', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
+    // beforeEach(() => request.post('/api/categories').send({ budget: 'candles' }));
 
     it('should post a new category document with budget = name', () => {
-        return request.post('/api/categories')
-            .send({ budget: 'hello' })
-            .then(response => {
-                assert.equal(response.body.budget, 'hello');
+        request.post('/api/categories/foods')
+        // .send({ budget: 'food' })
+            .then( response => {
+                assert.equal(response.body.budget, 'food');
             });
     });
 
