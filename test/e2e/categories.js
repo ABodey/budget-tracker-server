@@ -8,14 +8,14 @@ describe('categories', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
 
     it('should post a new category document with budget = name', () => {
-        return request.post('/api/bob/categories')
+        return request.post('/api/categories')
+            .send({ budget: 'hello' })
             .then(response => {
-                assert.ok(response.body);
+                assert.equal(response.body.budget, 'hello');
             });
     });
 
 });
-
 
 
 // GET /:name/categories - gets all categories where budget === name (full select)
