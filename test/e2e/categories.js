@@ -7,22 +7,22 @@ const assert = chai.assert;
 describe('categories', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
     beforeEach(() => Promise.all([
-        request.post('/api/candles/categories'),
-        request.post('/api/candles/categories'),
-        request.post('/api/data/categories'),
-        request.post('/api/food/categories'),
-        request.post('/api/secret/categories'),
+        request.post('/api/bob/categories'),
+        request.post('/api/bob/categories'),
+        request.post('/api/tim/categories'),
+        request.post('/api/susan/categories'),
+        request.post('/api/tairy/categories'),
     ]));
 
     it('should post a new category document with budget = name', () => {
-        return request.post('/api/food/categories')
+        return request.post('/api/bobson/categories')
             .then( category => {
-                assert.equal(category.body.budget, 'food');
+                assert.equal(category.body.name, 'bobson');
             });
     });
 
     it('should get all categories where budget === name ', () => {
-        return request.get('/api/candles/categories')
+        return request.get('/api/bob/categories')
             .then( response => {
                 assert.equal(response.body.length, 2);
             });
@@ -30,14 +30,14 @@ describe('categories', () => {
 
     it('should update the category document with id', () => {
         let catId = '';
-        return request.post('/api/manga/categories')
+        return request.post('/api/paul/categories')
             .then( category => {
                 catId = category._id;
             })
-            .then( () => request.post(`/api/manga/categories/${catId}`)
+            .then( () => request.post(`/api/paul/categories/${catId}`)
                 .send({ budget: 'anime' })
             )
-            .then( () => request.get('/api/manga/categories'))
+            .then( () => request.get('/api/paul/categories'))
             .then( categories => {
                 assert.equal(categories.length, 1);
             });
