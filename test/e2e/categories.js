@@ -104,7 +104,7 @@ describe('categories', () => {
                 return request.delete(`/api/dougie/categories/${catId}/expenses/${expenseId}`);
             })
             .then(({ body }) => {
-                assert.equal(body.deleted, true);
+                assert.equal(body.expenses.length, 0);
             });
     });
 
