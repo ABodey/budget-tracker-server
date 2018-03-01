@@ -84,7 +84,7 @@ describe('categories', () => {
                 return request.put(`/api/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
             })
             .then(({ body }) => {
-                assert.equal(body.expenses[0].price, '200');
+                assert.equal(body.expenses[0].price, '2000');
             });
     });
 
