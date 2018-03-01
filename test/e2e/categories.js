@@ -75,7 +75,10 @@ describe('categories', () => {
         };
 
         return request.post('/api/dougie/categories')
-            .then(({ body }) => catId = body._id)
+            .then(({ body }) => {
+                console.log('body_id is', body._id)
+                catId = body._id;
+            })
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
