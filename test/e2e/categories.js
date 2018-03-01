@@ -6,15 +6,28 @@ const assert = chai.assert;
 
 describe('categories', () => {
     beforeEach(() => mongoose.connection.dropDatabase());
-    // beforeEach(() => request.post('/api/categories').send({ budget: 'candles' }));
+    beforeEach(() => Promise.all([
+        request.post('/api/candles/categories'),
+        request.post('/api/candles/categories'),
+        request.post('/api/data/categories'),
+        request.post('/api/food/categories'),
+        request.post('/api/secret/categories'),
+    ]));
 
     it('should post a new category document with budget = name', () => {
-        request.post('/api/categories/foods')
-        // .send({ budget: 'food' })
-            .then( response => {
-                assert.equal(response.body.budget, 'food');
+        request.post('/api/food/categories')
+            .then( category => {
+                assert.equal(category.body.budget, 'food');
             });
     });
+
+    // it('should get all categories where budget === name ', () => {
+    //     request.get('/api/categories/candles')
+    //         .then( response => {
+    //             assert.equal(response.body[0].length, 2);
+    //         });
+    // });
+
 
 });
 
