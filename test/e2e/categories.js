@@ -15,22 +15,22 @@ describe('categories', () => {
     ]));
 
     it('should post a new category document with budget = name', () => {
-        request.post('/api/food/categories')
+        return request.post('/api/food/categories')
             .then( category => {
                 assert.equal(category.body.budget, 'food');
             });
     });
 
     it('should get all categories where budget === name ', () => {
-        request.get('/api/candles/categories')
+        return request.get('/api/candles/categories')
             .then( response => {
-                assert.equal(response.body[0].length, 2);
+                assert.equal(response.body.length, 2);
             });
     });
 
     it('should update the category document with id', () => {
         let catId = '';
-        request.post('/api/manga/categories')
+        return request.post('/api/manga/categories')
             .then( category => {
                 catId = category._id;
             })
