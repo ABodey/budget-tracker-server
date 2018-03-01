@@ -93,7 +93,7 @@ describe('categories', () => {
         let expenseId = '';
         const newExpense = {
             id: '123',
-            name: 'candles',
+            name: 'candles'
         };
 
         return request.post('/api/dougie/categories')
@@ -116,5 +116,4 @@ describe('categories', () => {
 // DELETE /:name/categories/:id - delete category document with id
 // POST /:name/categories/:id/expenses - $push the expense into category.expenses field of that id
 // PUT /:name/categories/:id/expenses/:id - update the expense of the category with that idea
-
 // DELETE /:name/categories/:id/expenses/:id - $pull the expense with that id out of doc
