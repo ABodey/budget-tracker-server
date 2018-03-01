@@ -64,13 +64,37 @@ describe('categories', () => {
             });
     });
 
+    it('should update the expense of the category with that id', () => {
+        let catId = '';
+        let expenseId = '';
+        const newExpense = {
+            id: '123',
+            name: 'candles',
+        };
+
+        const update = {
+            price: '2000'
+        };
+
+        return request.post('/api/dougie/categories')
+            .then(({ body }) => catId = body._id)
+            .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
+            .then(({ body }) => {
+                expenseId = body.expenses[0].id;
+                return request.put(`/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
+            })
+            .then(({ body }) => {
+                assert.equal(body.expenses[0].price, '200');
+            });
+
+    });
+
 });
 
 // GET /:name/categories - gets all categories where budget === name (full select)
 // POST /:name/categories - post a new category document with budget = name
 // PUT /:name/categories/:id - update the category document with id
 // DELETE /:name/categories/:id - delete category document with id
-
 // POST /:name/categories/:id/expenses - $push the expense into category.expenses field of that id
 
 // PUT /:name/categories/:id/expenses/:id - update the expense of the category with that idea
