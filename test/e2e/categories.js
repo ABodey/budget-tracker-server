@@ -63,13 +63,12 @@ describe('categories', () => {
             });
     });
 
-    it.only('should update the expense of the category with that id', () => {
+    it('should update the expense of the category with that id', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
             name: 'candles',
         };
-
         const update = {
             price: '2000'
         };
