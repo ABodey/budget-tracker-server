@@ -64,7 +64,7 @@ describe('categories', () => {
             });
     });
 
-    it.skip('should update the expense of the category with that id', () => {
+    it('should update the expense of the category with that id', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
@@ -88,7 +88,7 @@ describe('categories', () => {
                 return request.put(`/api/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
             })
             .then(({ body }) => {
-                assert.equal(body.expenses[0].price, '2000');
+                assert.equal(body.price, '2000');
             });
     });
 
