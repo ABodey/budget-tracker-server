@@ -94,7 +94,6 @@ describe('categories', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
-            id: '123',
             name: 'candles'
         };
 
@@ -102,7 +101,7 @@ describe('categories', () => {
             .then(({ body }) => catId = body._id)
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(({ body }) => {
-                expenseId = body.expenses[0].id;
+                expenseId = body.expenses[0]._id;
                 return request.delete(`/api/dougie/categories/${catId}/expenses/${expenseId}`);
             })
             .then(({ body }) => {
