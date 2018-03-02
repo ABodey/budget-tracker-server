@@ -54,6 +54,7 @@ describe('categories', () => {
         let catId = '';
         const newExpense = {
             name: 'candles',
+            price: '33'
         };
         return request.post('/api/dougie/categories')
             .then(({ body }) => catId = body._id)
