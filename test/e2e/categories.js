@@ -108,7 +108,6 @@ describe('categories', () => {
             .then(({ body }) => {
                 assert.equal(body.expenses.length, 0);
             });
-
     });
 
 });
