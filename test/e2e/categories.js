@@ -92,7 +92,7 @@ describe('categories', () => {
             });
     });
 
-    it.only('should $pull the expense with that id out of doc', () => {
+    it('should $pull the expense with that id out of doc', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
