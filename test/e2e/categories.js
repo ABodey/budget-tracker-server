@@ -60,37 +60,39 @@ describe('categories', () => {
             .then(({ body }) => catId = body._id)
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(({ body }) => {
-                assert.equal(body.expenses[0].name, 'candles');
+                assert.equal(body.name, 'candles');
             });
     });
 
-    it('should update the expense of the category with that id', () => {
+    it.skip('should update the expense of the category with that id', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
             name: 'candles',
         };
         const update = {
-            price: '2000'
+            price: '2000',
+            fakevalue: 'sdgsdg'
         };
 
         return request.post('/api/dougie/categories')
             .then(({ body }) => {
                 catId = body._id;
+                console.log('catId is', catId);
             })
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(({ body }) => {
-                expenseId = body.expenses[0]._id;
-                return request.put(`/api/dougie/categories/${body._id}/expenses/${expenseId}`).send(update);
+                expenseId = body._id;
+                return request.put(`/api/dougie/categories/${catId}/expenses/${expenseId}`).send(update);
             })
             .then(({ body }) => {
                 assert.equal(body.expenses[0].price, '2000');
             });
     });
 
-    it('should $pull the expense with that id out of doc', () => {
+    it.only('should $pull the expense with that id out of doc', () => {
         let catId = '';
         let expenseId = '';
         const newExpense = {
@@ -101,7 +103,7 @@ describe('categories', () => {
             .then(({ body }) => catId = body._id)
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(({ body }) => {
-                expenseId = body.expenses[0]._id;
+                expenseId = body._id;
                 return request.delete(`/api/dougie/categories/${catId}/expenses/${expenseId}`);
             })
             .then(({ body }) => {
