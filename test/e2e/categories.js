@@ -16,7 +16,7 @@ describe('categories', () => {
     it('should post a new category document with budget = name', () => {
         return request.post('/api/bobson/categories')
             .then( category => {
-                assert.equal(category.body.name, 'bobson');
+                assert.equal(category.body.user, 'bobson');
             });
     });
 
@@ -107,7 +107,7 @@ describe('categories', () => {
                 return request.delete(`/api/dougie/categories/${catId}/expenses/${expenseId}`);
             })
             .then(({ body }) => {
-                assert.equal(body.expenses.length, 0);
+                assert.equal(body.length, 0);
             });
     });
 
