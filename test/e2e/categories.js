@@ -78,7 +78,6 @@ describe('categories', () => {
         return request.post('/api/dougie/categories')
             .then(({ body }) => {
                 catId = body._id;
-                console.log('catId is', catId);
             })
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
             .then(() => request.post(`/api/dougie/categories/${catId}/expenses`).send(newExpense))
@@ -112,11 +111,3 @@ describe('categories', () => {
     });
 
 });
-
-// GET /:name/categories - gets all categories where budget === name (full select)
-// POST /:name/categories - post a new category document with budget = name
-// PUT /:name/categories/:id - update the category document with id
-// DELETE /:name/categories/:id - delete category document with id
-// POST /:name/categories/:id/expenses - $push the expense into category.expenses field of that id
-// PUT /:name/categories/:id/expenses/:id - update the expense of the category with that idea
-// DELETE /:name/categories/:id/expenses/:id - $pull the expense with that id out of doc
